@@ -63,6 +63,9 @@ const ChatScreen = ({ navigation, route }) => {
   }, [navigation, texts]);
 
   const sendMessage = () => {
+    if (message.trim() === "") {
+      return;
+    }
     Keyboard.dismiss();
     db.collection("chats").doc(route.params.id).collection("messages").add({
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
@@ -202,6 +205,7 @@ const styles = StyleSheet.create({
     position: "relative",
   },
   sender: {
+    marginLeft: 10,
     padding: 15,
     backgroundColor: "#2B68E6",
     alignSelf: "flex-start",
